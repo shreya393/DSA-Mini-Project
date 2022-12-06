@@ -1,7 +1,5 @@
 import java.util.*;
 
-
-
 class cityNode{
 	int cityNo;
 	//String cityName;
@@ -48,17 +46,67 @@ class creation{
     }
 	
 	 public void displayList() {
-	    	System.out.println("Adjacency List: ");
+	    	System.out.println("Paths Available: ");
 	        for (int i = 1; i <=c; i++) {
 	            cityNode curr = head[i];
 	            System.out.print(i + " ");
 	            while (curr != null) {
-	                System.out.print("-->" + curr.cityNo);
+	                System.out.print("--> " + curr.cityNo);
 	                curr = curr.next;
 	            }
 	            System.out.println();
 	        }
 	    }
+	 
+	 public void allCreate() {
+		 System.out.println("1: PUNE");
+	     System.out.println("2. BANGALORE");
+	     System.out.println("3. DELHI");
+	     System.out.println("4. KOLKATA");
+	     System.out.println("5. CHENNAI");
+	     System.out.println("6. LUCKNOW");
+	     System.out.println("7. INDORE");
+	     System.out.println("8. JAIPUR");
+	     System.out.println("9. GUWAHATI");
+	     System.out.println("10. HYDERABAD");
+	     System.out.println("11. RANCHI");
+		 cityNode c1=new cityNode(1);
+		 cityNode c2=new cityNode(2);
+		 cityNode c3=new cityNode(3);
+		 cityNode c4=new cityNode(4);
+		 cityNode c5=new cityNode(5);
+		 cityNode c6=new cityNode(6);
+		 cityNode c7=new cityNode(7);
+		 cityNode c8=new cityNode(8);
+		 cityNode c9=new cityNode(9);
+		 cityNode c10=new cityNode(10);
+		 cityNode c11=new cityNode(11);
+		 edgeCreate(c1.cityNo,c7.cityNo);
+		 edgeCreate(c1.cityNo,c8.cityNo);
+		 edgeCreate(c2.cityNo,c3.cityNo);
+		 edgeCreate(c2.cityNo,c5.cityNo);
+		 edgeCreate(c3.cityNo,c2.cityNo);
+		 edgeCreate(c3.cityNo,c8.cityNo);
+		 edgeCreate(c3.cityNo,c6.cityNo);
+		 edgeCreate(c4.cityNo,c11.cityNo);
+		 edgeCreate(c4.cityNo,c9.cityNo);
+		 edgeCreate(c5.cityNo,c10.cityNo);
+		 edgeCreate(c5.cityNo,c2.cityNo);
+		 edgeCreate(c6.cityNo,c3.cityNo);
+		 edgeCreate(c6.cityNo,c9.cityNo);
+		 edgeCreate(c7.cityNo,c10.cityNo);
+		 edgeCreate(c7.cityNo,c1.cityNo);
+		 edgeCreate(c8.cityNo,c3.cityNo);
+		 edgeCreate(c8.cityNo,c1.cityNo);
+		 edgeCreate(c9.cityNo,c6.cityNo);
+		 edgeCreate(c9.cityNo,c4.cityNo);
+		 edgeCreate(c10.cityNo,c5.cityNo);
+		 edgeCreate(c10.cityNo,c7.cityNo);
+		 edgeCreate(c10.cityNo,c11.cityNo);
+		 edgeCreate(c11.cityNo,c6.cityNo);
+		 edgeCreate(c11.cityNo,c4.cityNo);
+		 edgeCreate(c11.cityNo,c10.cityNo);
+	 }
 	
 	
 	
@@ -71,44 +119,9 @@ public class graphCreated {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		cityNode c1=new cityNode(1);
-		cityNode c2=new cityNode(2);
-		cityNode c3=new cityNode(3);
-		cityNode c4=new cityNode(4);
-		cityNode c5=new cityNode(5);
-		cityNode c6=new cityNode(6);
-		cityNode c7=new cityNode(7);
-		cityNode c8=new cityNode(8);
-		cityNode c9=new cityNode(9);
-		cityNode c10=new cityNode(10);
-		cityNode c11=new cityNode(11);
+	
 		creation cr=new creation();
-		cr.edgeCreate(c1.cityNo,c7.cityNo);
-		cr.edgeCreate(c1.cityNo,c8.cityNo);
-		cr.edgeCreate(c2.cityNo,c3.cityNo);
-		cr.edgeCreate(c2.cityNo,c5.cityNo);
-		cr.edgeCreate(c3.cityNo,c2.cityNo);
-		cr.edgeCreate(c3.cityNo,c8.cityNo);
-		cr.edgeCreate(c3.cityNo,c6.cityNo);
-		cr.edgeCreate(c4.cityNo,c11.cityNo);
-		cr.edgeCreate(c4.cityNo,c9.cityNo);
-		cr.edgeCreate(c5.cityNo,c10.cityNo);
-		cr.edgeCreate(c5.cityNo,c2.cityNo);
-		cr.edgeCreate(c6.cityNo,c3.cityNo);
-		cr.edgeCreate(c6.cityNo,c9.cityNo);
-		cr.edgeCreate(c7.cityNo,c10.cityNo);
-		cr.edgeCreate(c7.cityNo,c1.cityNo);
-		cr.edgeCreate(c8.cityNo,c3.cityNo);
-		cr.edgeCreate(c8.cityNo,c1.cityNo);
-		cr.edgeCreate(c9.cityNo,c6.cityNo);
-		cr.edgeCreate(c9.cityNo,c4.cityNo);
-		cr.edgeCreate(c10.cityNo,c5.cityNo);
-		cr.edgeCreate(c10.cityNo,c7.cityNo);
-		cr.edgeCreate(c10.cityNo,c11.cityNo);
-		cr.edgeCreate(c11.cityNo,c6.cityNo);
-		cr.edgeCreate(c11.cityNo,c4.cityNo);
-		cr.edgeCreate(c11.cityNo,c10.cityNo);
+		cr.allCreate();
 		cr.displayList();
 	}
 
