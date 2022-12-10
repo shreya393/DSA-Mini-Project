@@ -22,25 +22,22 @@ class creation{
 	
 	
 	Scanner sc = new Scanner(System.in);
-    cityNode head[] = new cityNode[12]; // number of heads for creating adjacency list
+    cityNode head[] = new cityNode[5]; // number of heads for creating adjacency list
     int c=5;// number of vertices total in graph
     int e=7;// number of edges
     int i;
     
-    
-    
-	
 	public void edgeCreate(cityNode u,cityNode v, int weight) {
 		
 			cityNode curr;
-			cityNode new_node=new cityNode(v);
+			//cityNode new_node=new cityNode(v);
         	for(i=0;i<c;i++) {
         		if(head[i].cityNo==u.cityNo) {
         			curr=head[i];
         			while(curr.next!=null) {
         				curr=curr.next;
         			}
-        			curr.next=new_node;
+        			curr.next=v;
         		}
         	}
         	
@@ -63,18 +60,19 @@ class creation{
         }
     
 //	
-//	 public void displayList() {
-//	    	System.out.println("Paths Available: ");
-//	        for (int i = 1; i <=c; i++) {
-//	            cityNode curr = head[i];
-//	            System.out.print(i + " ");
-//	            while (curr != null) {
-//	                System.out.print("--> " + curr.cityNo);
-//	                curr = curr.next;
-//	            }
-//	            System.out.println();
-//	        }
-//	    }
+	
+	 public void displayList() {
+	    	System.out.println("Adjacency list: ");
+	        for (int i = 0; i <c; i++) {
+	            cityNode curr = head[i];
+	            System.out.print(head[i].cityName + " ");
+	            while (curr.next != null) {
+	                curr = curr.next;
+	                System.out.print("--> " + curr.cityName);
+	            }
+	            System.out.println();
+	        }
+	    }
 	 
 	 public void allCreate() {
 
@@ -97,6 +95,13 @@ class creation{
 		 edgeCreate(c3,c5,10);
 		 edgeCreate(c4,c5,20);
 	 }
+	 
+	 void test() {
+			for(int i=0;i<head.length;i++) {
+				System.out.println(head[i].cityName);
+				System.out.println(head[i].cityNo);
+			}
+	 }
 }
 
 public class graphCreated {
@@ -107,6 +112,7 @@ public class graphCreated {
 		creation cr=new creation();
 		cr.allCreate();
 		cr.displayList();
+		cr.test();
 	}
 
 }
