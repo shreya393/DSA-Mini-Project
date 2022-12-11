@@ -27,21 +27,44 @@ class creation{
     int e=7;// number of edges
     int i;
     
+//    void assign(cityNode n) {
+//    	for(i=0;i<5;i++) {
+//    		if(n==head[i]) {
+//    			if(i==0) {
+//    				System.out.println("pune");
+//    				break;
+//    			}
+//    			else if(i==1) {
+//    				System.out.println("bangalore");
+//    			}
+//    			else if(i==2) {
+//    				System.out.println("delhi");
+//    			}
+//    			else if(i==3) {
+//    				System.out.println("indore");
+//    			}
+//    			else {
+//    				System.out.println("mumbai");
+//    			}
+//    		} 
+//    	}
+//    }
+    
 	public void edgeCreate(cityNode u,cityNode v, int weight) {
 		
 			cityNode curr;
-			//cityNode new_node=new cityNode(v);
+			cityNode new_node=new cityNode(v);
         	for(i=0;i<c;i++) {
         		if(head[i].cityNo==u.cityNo) {
         			curr=head[i];
         			while(curr.next!=null) {
         				curr=curr.next;
         			}
-        			curr.next=v;
+        			curr.next=new_node;
         		}
         	}
         	
-        	edgeCreate(v,u,weight);
+        	//edgeCreate(v,u,weight);
         	
         	
 //            if (head[1]==null) {//ie.for the first iteration we will create u node and since the
@@ -65,10 +88,13 @@ class creation{
 	    	System.out.println("Adjacency list: ");
 	        for (int i = 0; i <c; i++) {
 	            cityNode curr = head[i];
-	            System.out.print(head[i].cityName + " ");
+	            //assign(curr);
+	            System.out.print(curr.cityNo + " ");
 	            while (curr.next != null) {
 	                curr = curr.next;
-	                System.out.print("--> " + curr.cityName);
+	                System.out.print("--> " + curr.cityNo);
+	                //System.out.println("-->");
+	                //assign(curr);
 	            }
 	            System.out.println();
 	        }
@@ -88,20 +114,34 @@ class creation{
 		 head[4]=c5;
 		 
 		 edgeCreate(c1,c2,30);
+		 edgeCreate(c2,c1,30);
+		 //System.out.println("yes");
 		 edgeCreate(c1,c3,20);
+		 edgeCreate(c3,c1,20);
+		 //System.out.println("yes");
 		 edgeCreate(c2,c3,50);
+		 edgeCreate(c3,c2,20);
+		 //System.out.println("yes");
 		 edgeCreate(c2,c4,30);
+		 edgeCreate(c4,c2,20);
+		 //System.out.println("yes");
 		 edgeCreate(c3,c4,30);
+		 edgeCreate(c4,c3,20);
+		 //System.out.println("yes");
 		 edgeCreate(c3,c5,10);
+		 edgeCreate(c5,c3,20);
+		 //System.out.println("yes");
 		 edgeCreate(c4,c5,20);
+		 edgeCreate(c5,c4,20);
+		 //System.out.println("yes");
 	 }
 	 
-	 void test() {
-			for(int i=0;i<head.length;i++) {
-				System.out.println(head[i].cityName);
-				System.out.println(head[i].cityNo);
-			}
-	 }
+//	 void test() {
+//			for(int i=0;i<head.length;i++) {
+//				System.out.println(head[i].cityName);
+//				System.out.println(head[i].cityNo);
+//			}
+//	 }
 }
 
 public class graphCreated {
@@ -112,7 +152,7 @@ public class graphCreated {
 		creation cr=new creation();
 		cr.allCreate();
 		cr.displayList();
-		cr.test();
+		//cr.test();
 	}
 
 }
