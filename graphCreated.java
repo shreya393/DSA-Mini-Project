@@ -1,61 +1,44 @@
 import java.util.*;
 
-class cityNode{
-	int cityNo;
-	String cityName;
-	cityNode next;
+class Node{
+	int No;
+	String Name;
+	Node next;
+	char type;
 	
-	public cityNode(cityNode v) {
-		this.cityNo=v.cityNo;
-		this.cityName=v.cityName;
+	public Node(Node v) {
+		this.No=v.No;
+		this.Name=v.Name;
 		this.next=null;
 	}
 	
-	public cityNode(int cityNo,String cityName) {
-		this.cityNo=cityNo;
-		this.cityName=cityName;
+	public Node(int No,String Name, char type) {
+		this.No=No;
+		this.Name=Name;
+		this.type=type;
 		this.next=null;
 	}
 }
 
 class creation{
 	
-	
+	int adjmat[][];
 	Scanner sc = new Scanner(System.in);
-    cityNode head[] = new cityNode[5]; // number of heads for creating adjacency list
-    int c=5;// number of vertices total in graph
-    int e=7;// number of edges
+    Node head[] = new Node[13]; // number of heads for creating adjacency list
+    int c=13;// number of vertices total in graph
+    int e=13;// number of edges
     int i;
+    int j;
     
-//    void assign(cityNode n) {
-//    	for(i=0;i<5;i++) {
-//    		if(n==head[i]) {
-//    			if(i==0) {
-//    				System.out.println("pune");
-//    				break;
-//    			}
-//    			else if(i==1) {
-//    				System.out.println("bangalore");
-//    			}
-//    			else if(i==2) {
-//    				System.out.println("delhi");
-//    			}
-//    			else if(i==3) {
-//    				System.out.println("indore");
-//    			}
-//    			else {
-//    				System.out.println("mumbai");
-//    			}
-//    		} 
-//    	}
-//    }
-    
-	public void edgeCreate(cityNode u,cityNode v, int weight) {
+	public void edgeCreate(Node u,Node v, int weight) {
 		
-			cityNode curr;
-			cityNode new_node=new cityNode(v);
+			
+
+			//adjmat[(u.No)-1][(v.No)-1]=1;
+			Node curr;
+			Node new_node=new Node(v);
         	for(i=0;i<c;i++) {
-        		if(head[i].cityNo==u.cityNo) {
+        		if(head[i].No==u.No && head[i].type==u.type) {
         			curr=head[i];
         			while(curr.next!=null) {
         				curr=curr.next;
@@ -63,38 +46,16 @@ class creation{
         			curr.next=new_node;
         		}
         	}
-        	
-        	//edgeCreate(v,u,weight);
-        	
-        	
-//            if (head[1]==null) {//ie.for the first iteration we will create u node and since the
-//            	//array will be empty so we will add in the head node
-//            	head[1]=u;
-//            	System.out.println(head[1].cityName+"**");
-//            }
-//
-//            else {
-//                cityNode curr = head[u.cityNo]; // node created for traversal
-//                while (curr!= null) {
-//                    curr = curr.next;
-//                }
-//                curr.next = v; // added the new node at the last of linked list
-//            }
         }
     
-//	
-	
 	 public void displayList() {
 	    	System.out.println("Adjacency list: ");
 	        for (int i = 0; i <c; i++) {
-	            cityNode curr = head[i];
-	            //assign(curr);
-	            System.out.print(curr.cityNo + " ");
+	            Node curr = head[i];
+	            System.out.print(curr.Name + " ");
 	            while (curr.next != null) {
 	                curr = curr.next;
-	                System.out.print("--> " + curr.cityNo);
-	                //System.out.println("-->");
-	                //assign(curr);
+	                System.out.print("--> " + curr.Name);
 	            }
 	            System.out.println();
 	        }
@@ -102,48 +63,84 @@ class creation{
 	 
 	 public void allCreate() {
 
-		 cityNode c1=new cityNode(1,"pune");
+		 Node c1=new Node(1,"pune",'c');
 		 head[0]=c1;
-		 cityNode c2=new cityNode(2,"bangalore");
+		 Node c2=new Node(2,"bangalore",'c');
 		 head[1]=c2;
-		 cityNode c3=new cityNode(3,"delhi");
+		 Node c3=new Node(3,"delhi",'c');
 		 head[2]=c3;
-		 cityNode c4=new cityNode(4,"indore");
+		 Node c4=new Node(4,"indore",'c');
 		 head[3]=c4;
-		 cityNode c5=new cityNode(5,"kashmir");
+		 Node c5=new Node(5,"kashmir",'c');
 		 head[4]=c5;
+		 Node p1=new Node(1,"p1",'p');
+		 head[5]=p1;
+		 Node p2=new Node(2,"p2",'p');
+		 head[6]=p2;
+		 Node p3=new Node(3,"p3",'p');
+		 head[7]=p3;
+		 Node p4=new Node(4,"p4",'p');
+		 head[8]=p4;
+		 Node r1=new Node(1,"r1",'r');
+		 head[9]=r1;
+		 Node r2=new Node(2,"r2",'r');
+		 head[10]=r2;
+		 Node r3=new Node(3,"r3",'r');
+		 head[11]=r3;
+		 Node r4=new Node(4,"r4",'r');
+		 head[12]=r4;
+		
 		 
-		 edgeCreate(c1,c2,30);
-		 edgeCreate(c2,c1,30);
-		 //System.out.println("yes");
-		 edgeCreate(c1,c3,20);
-		 edgeCreate(c3,c1,20);
-		 //System.out.println("yes");
-		 edgeCreate(c2,c3,50);
-		 edgeCreate(c3,c2,20);
-		 //System.out.println("yes");
-		 edgeCreate(c2,c4,30);
-		 edgeCreate(c4,c2,20);
-		 //System.out.println("yes");
-		 edgeCreate(c3,c4,30);
-		 edgeCreate(c4,c3,20);
-		 //System.out.println("yes");
-		 edgeCreate(c3,c5,10);
-		 edgeCreate(c5,c3,20);
-		 //System.out.println("yes");
-		 edgeCreate(c4,c5,20);
-		 edgeCreate(c5,c4,20);
-		 //System.out.println("yes");
+		 
+		 edgeCreate(c1,p1,500);
+		 edgeCreate(p1,c1,500);
+		 
+		 edgeCreate(p1,r1,700);
+		 edgeCreate(r1,p1,700);
+		 
+		 edgeCreate(r1,c3,200);
+		 edgeCreate(c3,r1,200);
+		 
+		 edgeCreate(r1,c5,400);
+		 edgeCreate(c5,r1,400);
+		 
+		 edgeCreate(c3,p2,600);
+		 edgeCreate(p2,c3,600);
+		 
+		 edgeCreate(p2,r2,150);
+		 edgeCreate(r2,p2,150);
+		 
+		 edgeCreate(r2,r3,800);
+		 edgeCreate(r3,r2,800);
+		 
+		 edgeCreate(c4,r3,475);
+		 edgeCreate(r3,c4,475);
+		 
+		 edgeCreate(c4,p3,725);
+		 edgeCreate(p3,c4,725);
+		 
+		 edgeCreate(c2,p3,650);
+		 edgeCreate(p3,c2,650);
+		 
+		 edgeCreate(c2,p4,570);
+		 edgeCreate(p4,c2,570);
+		 
+		 edgeCreate(p4,r4,315);
+		 edgeCreate(r4,p4,315);
+		 
+		 edgeCreate(p4,c5,740);
+		 edgeCreate(c5,p4,740);
+		 
+		 edgeCreate(r1,c5,100);
+		 edgeCreate(c5,r1,100);
 	 }
 	 
-//	 void test() {
-//			for(int i=0;i<head.length;i++) {
-//				System.out.println(head[i].cityName);
-//				System.out.println(head[i].cityNo);
-//			}
-//	 }
-}
 
+
+//	 void shortest() {
+//		 adjmat=new int[13][13];
+//}
+}	
 public class graphCreated {
 
 	public static void main(String[] args) {
