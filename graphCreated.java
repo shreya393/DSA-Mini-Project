@@ -1,3 +1,4 @@
+
 import java.util.*;
 
 class Node{
@@ -21,7 +22,7 @@ class Node{
 }
 
 class creation{
-	
+	//int graph[][];
 	int adjmat[][];
 	Scanner sc = new Scanner(System.in);
     Node head[] = new Node[13]; // number of heads for creating adjacency list
@@ -31,10 +32,7 @@ class creation{
     int j;
     
 	public void edgeCreate(Node u,Node v, int weight) {
-		
 			
-
-			//adjmat[(u.No)-1][(v.No)-1]=1;
 			Node curr;
 			Node new_node=new Node(v);
         	for(i=0;i<c;i++) {
@@ -47,10 +45,110 @@ class creation{
         		}
         	}
         }
+	/*public int minDistance(int dist[], Boolean b[]) {
+		int min=Integer.MAX_VALUE, index=-1;
+		for(int x=1; x<14; x++) {
+			if(b[x]==false && dist[x]<=min) {
+				min=dist[x];
+				index=x;
+			}
+			
+		}
+		return index;
+	}
+	public void printGraph(int dist[], int x) {
+		System.out.println("Distance from source to destination is: ");
+		for(int i=1; i<14; i++) {
+			System.out.println(i+ " ----" +dist[i]);
+		}
+			
+		
+	}
+	public void dijkstra(int[][] adjacencyMatrix, int src) {
+		int dist[]= new int[14];
+		Boolean b[]=new Boolean[14];
+		for (int i=1; i<14; i++) {
+			dist[i]=Integer.MAX_VALUE;
+			b[i]=false;
+		}
+		dist[0]=0;
+		for(int count=1; count<=14; count++) {
+			int u=minDistance(dist,b);
+			b[i]=true;
+			for(int x=1; x<14; x++) {
+				if(!b[x] && adjacencyMatrix[u][x]!=0 && dist[u]!=Integer.MAX_VALUE && dist[u]+adjacencyMatrix[u][x]<dist[x]){
+					dist[x]=dist[u]+adjacencyMatrix[u][x];
+					}
+				printGraph(dist,x);
+			}
+		}
+	}*/
+	
+	public void dijkstra(int[][] adjacencyMatrix,Node src) {
+		System.out.println("dijkstra:");
+		int v=adjacencyMatrix.length;
+		boolean visited[]=new boolean[v];
+		int distance[]=new int[v];
+		//distance[0]=0;
+		//first vertex ka distance would be 0 and baki saaare vertex ka distance would be infinity intially
+		for(int i=0;i<13;i++) {
+			distance[i]=Integer.MAX_VALUE;
+			visited[i]=false;
+		}
+		
+		int index=0;
+		for(i=0;i<v;i++) {
+			if((head[i].Name).equalsIgnoreCase(src.Name)) {
+				index=i;
+				break;
+			}
+		}
+		distance[index]=0;
+		
+		for(int i=0;i<v-1;i++) {
+			//find vertex with minimum distance from the starting vertex
+			int minVertex=findMinVertex(distance,visited);
+			visited[minVertex]=true;
+			//explore the neighbors
+			for(int j=0;j<v;j++) {
+				if(adjacencyMatrix[minVertex][j]!=0 && !visited[j] && distance[minVertex]!=Integer.MAX_VALUE) {
+					
+					int newDist=distance[minVertex]+adjacencyMatrix[minVertex][j];
+					if(newDist<distance[j]) {
+						distance[j]=newDist;
+					}
+				}
+			}
+		}
+		
+		//print vertex ka number and uska distance
+		for(int i=0;i<13;i++) {
+			System.out.println(i+" "+distance[i]);
+		}
+	}
+	
+	public void matrix() {
+		for(int i=1;i<14;i++) {
+			for(int j=1;j<14;j++) {
+				System.out.print("  "+adjmat[i][j]+"  ");
+			}
+			System.out.println();
+		}
+	}
+	
+	public int findMinVertex(int[]distance,boolean visited[]) {
+		int minVertex=-1;
+		for(int i=0;i<distance.length;i++) {
+			if(!visited[i] && (minVertex==-1 || distance[i]<distance[minVertex])) {
+				minVertex=i;
+			}
+		}
+		return minVertex;
+	}
     
 	 public void displayList() {
 	    	System.out.println("Adjacency list: ");
-	        for (int i = 0; i <c; i++) {
+	        for (int i = 1; i <c; i++) {
 	            Node curr = head[i];
 	            System.out.print(curr.Name + " ");
 	            while (curr.next != null) {
@@ -62,84 +160,115 @@ class creation{
 	    }
 	 
 	 public void allCreate() {
-
-		 Node c1=new Node(1,"pune",'c');
+		 adjmat=new int[13][13];
+		 for(int i=0;i<13;i++) {
+				for(int j=0;j<13;j++) {
+					adjmat[i][j]=000;
+				}
+			}
+		 Node c1=new Node(0,"pune",'c');
 		 head[0]=c1;
-		 Node c2=new Node(2,"bangalore",'c');
-		 head[1]=c2;
-		 Node c3=new Node(3,"delhi",'c');
-		 head[2]=c3;
-		 Node c4=new Node(4,"indore",'c');
-		 head[3]=c4;
-		 Node c5=new Node(5,"kashmir",'c');
-		 head[4]=c5;
+		 Node c2=new Node(6,"bangalore",'c');
+		 head[6]=c2;
+		 Node c3=new Node(12,"delhi",'c');
+		 head[12]=c3;
+		 Node c4=new Node(8,"indore",'c');
+		 head[8]=c4;
+		 Node c5=new Node(3,"kashmir",'c');
+		 head[3]=c5;
 		 Node p1=new Node(1,"p1",'p');
-		 head[5]=p1;
-		 Node p2=new Node(2,"p2",'p');
-		 head[6]=p2;
-		 Node p3=new Node(3,"p3",'p');
+		 head[1]=p1;
+		 Node p2=new Node(11,"p2",'p');
+		 head[11]=p2;
+		 Node p3=new Node(7,"p3",'p');
 		 head[7]=p3;
 		 Node p4=new Node(4,"p4",'p');
-		 head[8]=p4;
-		 Node r1=new Node(1,"r1",'r');
-		 head[9]=r1;
-		 Node r2=new Node(2,"r2",'r');
+		 head[4]=p4;
+		 Node r1=new Node(2,"r1",'r');
+		 head[2]=r1;
+		 Node r2=new Node(10,"r2",'r');
 		 head[10]=r2;
-		 Node r3=new Node(3,"r3",'r');
-		 head[11]=r3;
-		 Node r4=new Node(4,"r4",'r');
-		 head[12]=r4;
+		 Node r3=new Node(9,"r3",'r');
+		 head[9]=r3;
+		 Node r4=new Node(5,"r4",'r');
+		 head[5]=r4;
 		
 		 
 		 
 		 edgeCreate(c1,p1,500);
 		 edgeCreate(p1,c1,500);
+		 adjmat[0][1]=500;
+		 adjmat[1][0]=500;
 		 
 		 edgeCreate(p1,r1,700);
 		 edgeCreate(r1,p1,700);
+		 adjmat[1][2]=700;
+		 adjmat[2][1]=700;
 		 
 		 edgeCreate(r1,c3,200);
 		 edgeCreate(c3,r1,200);
-		 
-		 edgeCreate(r1,c5,400);
-		 edgeCreate(c5,r1,400);
+		 adjmat[2][12]=200;
+		 adjmat[12][2]=200;
 		 
 		 edgeCreate(c3,p2,600);
 		 edgeCreate(p2,c3,600);
+		 adjmat[12][11]=600;
+		 adjmat[11][12]=600;
 		 
 		 edgeCreate(p2,r2,150);
 		 edgeCreate(r2,p2,150);
+		 adjmat[11][10]=150;
+		 adjmat[10][11]=150;
 		 
 		 edgeCreate(r2,r3,800);
 		 edgeCreate(r3,r2,800);
+		 adjmat[10][9]=800;
+		 adjmat[9][10]=800;
 		 
 		 edgeCreate(c4,r3,475);
 		 edgeCreate(r3,c4,475);
+		 adjmat[8][9]=475;
+		 adjmat[9][8]=475;
 		 
 		 edgeCreate(c4,p3,725);
 		 edgeCreate(p3,c4,725);
+		 adjmat[8][7]=725;
+		 adjmat[7][8]=725;
 		 
 		 edgeCreate(c2,p3,650);
 		 edgeCreate(p3,c2,650);
+		 adjmat[6][7]=650;
+		 adjmat[7][6]=650;
 		 
 		 edgeCreate(c2,p4,570);
 		 edgeCreate(p4,c2,570);
+		 adjmat[6][4]=570;
+		 adjmat[4][6]=570;
 		 
 		 edgeCreate(p4,r4,315);
 		 edgeCreate(r4,p4,315);
+		 adjmat[4][5]=315;
+		 adjmat[5][4]=315;
 		 
 		 edgeCreate(p4,c5,740);
 		 edgeCreate(c5,p4,740);
+		 adjmat[4][3]=740;
+		 adjmat[3][4]=740;
 		 
 		 edgeCreate(r1,c5,100);
 		 edgeCreate(c5,r1,100);
+		 adjmat[2][3]=100;
+		 adjmat[3][2]=100;
+		 
+		 dijkstra(adjmat,c1);
+		 dijkstra(adjmat,c2);
+		 dijkstra(adjmat,c3);
+		 dijkstra(adjmat,c4);
 	 }
 	 
 
 
-//	 void shortest() {
-//		 adjmat=new int[13][13];
-//}
+
 }	
 public class graphCreated {
 
@@ -149,7 +278,9 @@ public class graphCreated {
 		creation cr=new creation();
 		cr.allCreate();
 		cr.displayList();
-		//cr.test();
+		cr.matrix();
+		
+		
 	}
 
 }
