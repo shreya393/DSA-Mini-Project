@@ -22,7 +22,8 @@ class Node{
 }
 
 class creation{
-	//int graph[][];
+	Node c1,c2,c3,c4,c5,p1,p2,p3,p4,r1,r2,r3,r4;
+	int src1,dest,actualDest;
 	int adjmat[][];
 	Scanner sc = new Scanner(System.in);
     Node head[] = new Node[13]; // number of heads for creating adjacency list
@@ -45,47 +46,10 @@ class creation{
         		}
         	}
         }
-	/*public int minDistance(int dist[], Boolean b[]) {
-		int min=Integer.MAX_VALUE, index=-1;
-		for(int x=1; x<14; x++) {
-			if(b[x]==false && dist[x]<=min) {
-				min=dist[x];
-				index=x;
-			}
-			
-		}
-		return index;
-	}
-	public void printGraph(int dist[], int x) {
-		System.out.println("Distance from source to destination is: ");
-		for(int i=1; i<14; i++) {
-			System.out.println(i+ " ----" +dist[i]);
-		}
-			
-		
-	}
-	public void dijkstra(int[][] adjacencyMatrix, int src) {
-		int dist[]= new int[14];
-		Boolean b[]=new Boolean[14];
-		for (int i=1; i<14; i++) {
-			dist[i]=Integer.MAX_VALUE;
-			b[i]=false;
-		}
-		dist[0]=0;
-		for(int count=1; count<=14; count++) {
-			int u=minDistance(dist,b);
-			b[i]=true;
-			for(int x=1; x<14; x++) {
-				if(!b[x] && adjacencyMatrix[u][x]!=0 && dist[u]!=Integer.MAX_VALUE && dist[u]+adjacencyMatrix[u][x]<dist[x]){
-					dist[x]=dist[u]+adjacencyMatrix[u][x];
-					}
-				printGraph(dist,x);
-			}
-		}
-	}*/
+	 
 	
 	public void dijkstra(int[][] adjacencyMatrix,Node src) {
-		System.out.println("dijkstra:");
+		
 		int v=adjacencyMatrix.length;
 		boolean visited[]=new boolean[v];
 		int distance[]=new int[v];
@@ -122,19 +86,11 @@ class creation{
 		}
 		
 		//print vertex ka number and uska distance
-		for(int i=0;i<13;i++) {
-			System.out.println(i+" "+distance[i]);
-		}
+		
+			System.out.println("shortest distance from "+src.Name+" is "+distance[actualDest]+"km");
+		
 	}
 	
-	public void matrix() {
-		for(int i=1;i<14;i++) {
-			for(int j=1;j<14;j++) {
-				System.out.print("  "+adjmat[i][j]+"  ");
-			}
-			System.out.println();
-		}
-	}
 	
 	public int findMinVertex(int[]distance,boolean visited[]) {
 		int minVertex=-1;
@@ -166,34 +122,32 @@ class creation{
 					adjmat[i][j]=000;
 				}
 			}
-		 Node c1=new Node(0,"pune",'c');
+		 c1=new Node(0,"pune",'c');
 		 head[0]=c1;
-		 Node c2=new Node(6,"bangalore",'c');
+		 c2=new Node(6,"bangalore",'c');
 		 head[6]=c2;
-		 Node c3=new Node(12,"delhi",'c');
+		 c3=new Node(12,"delhi",'c');
 		 head[12]=c3;
-		 Node c4=new Node(8,"indore",'c');
+		 c4=new Node(8,"indore",'c');
 		 head[8]=c4;
-		 Node c5=new Node(3,"kashmir",'c');
+		 c5=new Node(3,"kashmir",'c');
 		 head[3]=c5;
-		 Node p1=new Node(1,"p1",'p');
+		 p1=new Node(1,"p1",'p');
 		 head[1]=p1;
-		 Node p2=new Node(11,"p2",'p');
+		 p2=new Node(11,"p2",'p');
 		 head[11]=p2;
-		 Node p3=new Node(7,"p3",'p');
+		 p3=new Node(7,"p3",'p');
 		 head[7]=p3;
-		 Node p4=new Node(4,"p4",'p');
+		 p4=new Node(4,"p4",'p');
 		 head[4]=p4;
-		 Node r1=new Node(2,"r1",'r');
+		 r1=new Node(2,"r1",'r');
 		 head[2]=r1;
-		 Node r2=new Node(10,"r2",'r');
+		 r2=new Node(10,"r2",'r');
 		 head[10]=r2;
-		 Node r3=new Node(9,"r3",'r');
+		 r3=new Node(9,"r3",'r');
 		 head[9]=r3;
-		 Node r4=new Node(5,"r4",'r');
+		 r4=new Node(5,"r4",'r');
 		 head[5]=r4;
-		
-		 
 		 
 		 edgeCreate(c1,p1,500);
 		 edgeCreate(p1,c1,500);
@@ -260,27 +214,119 @@ class creation{
 		 adjmat[2][3]=100;
 		 adjmat[3][2]=100;
 		 
-		 dijkstra(adjmat,c1);
-		 dijkstra(adjmat,c2);
-		 dijkstra(adjmat,c3);
-		 dijkstra(adjmat,c4);
+		 
 	 }
 	 
-
-
-
+	 public void shortestPath() {
+		 	System.out.println("enter the source node: ");
+			src1=sc.nextInt();
+			System.out.println("enter the dest node: ");
+			dest=sc.nextInt();
+			
+			if(src1==1) {
+				if(dest==1) {
+					actualDest=0;
+				}
+				else if(dest==2) {
+					actualDest=6;
+				}
+				else if(dest==3) {
+					actualDest=12;
+				}
+				else if(dest==4) {
+					actualDest=8;
+				}
+				else if(dest==5) {
+					actualDest=3;
+				}
+				dijkstra(adjmat,c1);
+			}
+			else if(src1==2){
+				if(dest==1) {
+					actualDest=0;
+				}
+				else if(dest==2) {
+					actualDest=6;
+				}
+				else if(dest==3) {
+					actualDest=12;
+				}
+				else if(dest==4) {
+					actualDest=8;
+				}
+				else if(dest==5) {
+					actualDest=3;
+				}
+				dijkstra(adjmat,c2);
+			}
+			else if(src1==3){
+				if(dest==1) {
+					actualDest=0;
+				}
+				else if(dest==2) {
+					actualDest=6;
+				}
+				else if(dest==3) {
+					actualDest=12;
+				}
+				else if(dest==4) {
+					actualDest=8;
+				}
+				else if(dest==5) {
+					actualDest=3;
+				}
+				dijkstra(adjmat,c3);
+			}
+			else if(src1==4){
+				if(dest==1) {
+					actualDest=0;
+				}
+				else if(dest==2) {
+					actualDest=6;
+				}
+				else if(dest==3) {
+					actualDest=12;
+				}
+				else if(dest==4) {
+					actualDest=8;
+				}
+				else if(dest==5) {
+					actualDest=3;
+				}
+				dijkstra(adjmat,c4);
+			}
+			else if(src1==5){
+				if(dest==1) {
+					actualDest=0;
+				}
+				else if(dest==2) {
+					actualDest=6;
+				}
+				else if(dest==3) {
+					actualDest=12;
+				}
+				else if(dest==4) {
+					actualDest=8;
+				}
+				else if(dest==5) {
+					actualDest=3;
+				}
+				dijkstra(adjmat,c5);
+			}
+	 }
 }	
 public class graphCreated {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-	
+		System.out.println("City 1: PUNE");
+		System.out.println("City 2: BANGALORE");
+		System.out.println("City 3: DELHI");
+		System.out.println("City 4: INDORE");
+		System.out.println("City 5: KASHMIR");
 		creation cr=new creation();
 		cr.allCreate();
 		cr.displayList();
-		cr.matrix();
-		
-		
+		cr.shortestPath();
 	}
-
 }
